@@ -1,22 +1,46 @@
 .upcoming-lifters-lifter-name {
-  border-radius: 12px;
-  padding-left: 8px;
+  padding-left: 0;
   padding-right: 8px;
-  height: 40px;
+  height: 30px;
   overflow: hidden;
-  background-color: #444444;
+  background-color: var(--secondary-color);
   color: white;
-  font-weight: bold;
+  font-weight: 400;
   width: 250px;
-  margin-bottom: 8px;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   display: flex;
-  justify-content: center;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.upcoming-lifters-order {
+  flex-shrink: 0;
+  font-weight: bold;
+  width: 30px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: var(--tertiary-color);
 }
 
 /* make sure the inline-block div that react-fitty adds is centered vertically */
+.upcoming-lifters-lifter-name > div {
+  display: flex;
+  align-items: center;
+}
+
 .upcoming-lifters-lifter-name > div > div {
   vertical-align: middle;
+}
+
+.upcoming-lifters-header {
+  padding: 8px;
+  height: 30px;
+  overflow: hidden;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  width: 250px;
+  text-align: left;
 }

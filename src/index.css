@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -11,7 +13,7 @@
 }
 
 :root {
-  font-family: "Roboto", sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,7 +28,17 @@
     red and green are used for bad/good lifts.
     red, blue, and yellow are used for fault cards.
    */
-  background-color: orange;
+  /* background-color: orange; */
+  background-color: rgba(0, 0, 0, 0);
+
+  --primary-color: rgba(30, 53, 102, 0.8);
+  --secondary-color: rgba(129, 160, 199, 0.8);
+  --tertiary-color: rgba(100, 120, 144, 0.8);
+  --red: rgb(255 39 37);
+  --green: rgb(0 188 48);
+  --ref-blue: rgb(0 143 235);
+  --ref-yellow: rgb(255 225 50);
+  --dark-blue: rgba(53, 59, 73, 0.8);
 }
 
 body {

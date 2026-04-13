@@ -22,9 +22,11 @@ export const UpcomingLifters = ({
   const nextFiveAttempts = take(platform.nextAttempts, 5);
   return (
     <div className="upcoming-lifters">
-      {nextFiveAttempts.map((attempt) => {
+      <div className="upcoming-lifters-header">UP NEXT</div>
+      {nextFiveAttempts.map((attempt, index) => {
         return (
           <div key={attempt.id} className="upcoming-lifters-lifter-name">
+            <span className="upcoming-lifters-order">{index + 1}</span>
             <AutoSize>{lifters[attempt.lifter.id]?.name}</AutoSize>
           </div>
         );

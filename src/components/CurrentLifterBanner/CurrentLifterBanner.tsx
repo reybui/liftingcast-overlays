@@ -11,7 +11,7 @@ import { every, first } from "lodash";
 import classNames from "classnames";
 import "./CurrentLifterBanner.css";
 import React from "react";
-import logo from "/logo.svg";
+import logo from "/logo.png";
 
 // @ts-expect-error types are not working for react-fitty
 import { ReactFitty } from "react-fitty";
@@ -35,7 +35,7 @@ export const CurrentLifterBanner = ({
   const currentLifterId = currentAttempt?.lifter.id;
   const currentLifter =
     currentLifterId && lifters[currentLifterId]
-      ? lifters[currentLifterId] ?? null
+      ? (lifters[currentLifterId] ?? null)
       : null;
   const firstLifterDivision = first(currentLifter?.divisions);
   const firstDivisionId = firstLifterDivision?.divisionId;
@@ -54,24 +54,40 @@ export const CurrentLifterBanner = ({
       <div className="current-lifter-banner-column-two">
         <div className="current-lifter-banner-name">
           <AutoSize>
-            {currentLifter?.name} {!!currentLifter?.team && " : "}
-            {currentLifter?.team}
+            {currentLifter?.name
+              ? currentLifter.name.includes(" ")
+                ? currentLifter.name.substring(
+                    currentLifter.name.lastIndexOf(" ") + 1,
+                  )
+                : currentLifter.name
+              : null}
+          </AutoSize>
+        </div>
+        <div className="current-lifter-banner-name">
+          <AutoSize>
+            {currentLifter?.name?.includes(" ")
+              ? currentLifter.name.substring(
+                  0,
+                  currentLifter.name.lastIndexOf(" "),
+                )
+              : null}
+            {!!currentLifter?.team && ` : ${currentLifter.team}`}
           </AutoSize>
         </div>
 
         {firstDivision && firstWeightClass && (
           <div className="current-lifter-banner-category">
             <AutoSize>
-              {firstDivision?.name} - {firstWeightClass?.name}
+              {firstDivision?.name} {firstWeightClass?.name}
             </AutoSize>
           </div>
         )}
       </div>
       <div className="current-lifter-banner-column-three">
         <div className="current-lifter-banner-attempts">
-          <div className="current-lifter-banner-lift-name">
+          {/* <div className="current-lifter-banner-lift-name">
             {currentAttempt?.liftName}
-          </div>
+          </div> */}
           <Attempts currentAttempt={currentAttempt} lifter={currentLifter} />
         </div>
       </div>
@@ -84,7 +100,7 @@ export const CurrentLifterBanner = ({
 
 const AutoSize = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ReactFitty minSize={8} maxSize={16} wrapText={false}>
+    <ReactFitty minSize={8} maxSize={20} wrapText={false}>
       {children}
     </ReactFitty>
   );
@@ -111,7 +127,7 @@ const AttemptCell = ({
         "current-lifter-banner-attempt",
         isCurrent && "current-lifter-banner-attempt-current",
         attempt?.result === "good" && "current-lifter-banner-attempt-good",
-        attempt?.result === "bad" && "current-lifter-banner-attempt-bad"
+        attempt?.result === "bad" && "current-lifter-banner-attempt-bad",
       )}
     >
       {attempt?.weight}
@@ -160,17 +176,17 @@ const Lights = ({ refLights }: { refLights: RefLights }) => {
   React.useEffect(() => {
     const allSelectedCurrent = every(
       refLights,
-      (rl) => rl.decision === "good" || rl.decision === "bad"
+      (rl) => rl.decision === "good" || rl.decision === "bad",
     );
 
     const allSelectedPrevious = every(
       refLightsInternal,
-      (rl) => rl.decision === "good" || rl.decision === "bad"
+      (rl) => rl.decision === "good" || rl.decision === "bad",
     );
     if (allSelectedPrevious && !allSelectedCurrent) {
       setTimeout(
         () => setRefLightsInternal(refLights),
-        Number(lightsOffDelaySeconds ?? "0") * 1000
+        Number(lightsOffDelaySeconds ?? "0") * 1000,
       );
     } else {
       setRefLightsInternal(refLights);
@@ -195,7 +211,7 @@ const Light = ({
 }) => {
   const allSelected = every(
     refLights,
-    (rl) => rl.decision === "good" || rl.decision === "bad"
+    (rl) => rl.decision === "good" || rl.decision === "bad",
   );
 
   return (
@@ -207,7 +223,7 @@ const Light = ({
           "current-lifter-banner-light-red",
         allSelected &&
           refLight.decision === "good" &&
-          "current-lifter-banner-light-white"
+          "current-lifter-banner-light-white",
       )}
     ></div>
   );

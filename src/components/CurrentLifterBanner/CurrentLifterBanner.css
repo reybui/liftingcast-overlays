@@ -1,7 +1,7 @@
 .current-lifter-banner {
   height: 80px;
   overflow: hidden;
-  background-color: #444444;
+  background-color: var(--primary-color);
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -11,7 +11,6 @@
   grid-template-columns: repeat(20, 5%);
   margin-bottom: 20px;
 }
-
 .current-lifter-banner-column-one {
   grid-column: span 3;
   display: flex;
@@ -23,13 +22,13 @@
 }
 
 .current-lifter-banner-column-one img {
-  height: 230px;
-  width: 230px;
+  height: 90%;
+  width: auto;
 }
 
 .current-lifter-banner-column-two {
   padding: 12px;
-  grid-column: span 6;
+  grid-column: span 4;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,13 +73,14 @@
 }
 
 .current-lifter-banner-attempt {
-  height: 40px;
-  width: 100%;
-  border: 1px solid white;
-  border-radius: 12px;
+  height: auto;
+  width: auto;
+  /* border: 1px solid white;
+  border-radius: 12px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 36px;
 }
 
 .current-lifter-banner-column-four {
@@ -92,15 +92,18 @@
 }
 
 .current-lifter-banner-attempt-current {
-  background-color: blue;
+  /* background-color: blue; */
+  color: white;
 }
 
 .current-lifter-banner-attempt-good {
-  background-color: green;
+  /* background-color: var(--green); */
+  color: var(--green);
 }
 
 .current-lifter-banner-attempt-bad {
-  background-color: red;
+  /* background-color: var(--red); */
+  color: var(--red);
 }
 
 .current-lifter-banner-lights {
@@ -120,7 +123,7 @@
 }
 
 .current-lifter-banner-light-red {
-  background-color: red;
+  background-color: var(--red);
 }
 
 .current-lifter-banner-light-white {
