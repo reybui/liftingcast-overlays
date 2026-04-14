@@ -52,7 +52,7 @@ export const CurrentLifterBanner = ({
         <img src={logo} className="logo" alt="logo" />
       </div>
       <div className="current-lifter-banner-column-two">
-        <div className="current-lifter-banner-name">
+        <div className="current-lifter-banner-name-last-name">
           <AutoSize>
             {currentLifter?.name
               ? currentLifter.name.includes(" ")
@@ -63,7 +63,7 @@ export const CurrentLifterBanner = ({
               : null}
           </AutoSize>
         </div>
-        <div className="current-lifter-banner-name">
+        <div className="current-lifter-banner-name-first-name">
           <AutoSize>
             {currentLifter?.name?.includes(" ")
               ? currentLifter.name.substring(
@@ -77,9 +77,9 @@ export const CurrentLifterBanner = ({
 
         {firstDivision && firstWeightClass && (
           <div className="current-lifter-banner-category">
-            <AutoSize>
+            <AutoSizeSmall>
               {firstDivision?.name} {firstWeightClass?.name}
-            </AutoSize>
+            </AutoSizeSmall>
           </div>
         )}
       </div>
@@ -95,74 +95,6 @@ export const CurrentLifterBanner = ({
         <Lights refLights={platform.refLights} />
       </div>
     </div>
-  );
-};
-
-const AutoSize = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <ReactFitty minSize={8} maxSize={20} wrapText={false}>
-      {children}
-    </ReactFitty>
-  );
-};
-
-const AttemptCell = ({
-  liftName,
-  attemptNumber,
-  isCurrent,
-  lifter,
-}: {
-  liftName: LiftName | undefined;
-  attemptNumber: AttemptNumber | undefined;
-  isCurrent: boolean;
-  lifter: Lifter | null;
-}) => {
-  const attempt =
-    lifter && liftName && attemptNumber
-      ? lifter.lifts[liftName][attemptNumber]
-      : null;
-  return (
-    <div
-      className={classNames(
-        "current-lifter-banner-attempt",
-        isCurrent && "current-lifter-banner-attempt-current",
-        attempt?.result === "good" && "current-lifter-banner-attempt-good",
-        attempt?.result === "bad" && "current-lifter-banner-attempt-bad",
-      )}
-    >
-      {attempt?.weight}
-    </div>
-  );
-};
-
-const Attempts = ({
-  currentAttempt,
-  lifter,
-}: {
-  currentAttempt: Attempt | null;
-  lifter: Lifter | null;
-}) => {
-  return (
-    <>
-      <AttemptCell
-        isCurrent={currentAttempt?.attemptNumber === "1"}
-        liftName={currentAttempt?.liftName}
-        attemptNumber="1"
-        lifter={lifter}
-      />
-      <AttemptCell
-        isCurrent={currentAttempt?.attemptNumber === "2"}
-        liftName={currentAttempt?.liftName}
-        attemptNumber="2"
-        lifter={lifter}
-      />
-      <AttemptCell
-        isCurrent={currentAttempt?.attemptNumber === "3"}
-        liftName={currentAttempt?.liftName}
-        attemptNumber="3"
-        lifter={lifter}
-      />
-    </>
   );
 };
 
@@ -228,3 +160,80 @@ const Light = ({
     ></div>
   );
 };
+
+const AutoSize = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ReactFitty minSize={8} maxSize={20} wrapText={false}>
+      {children}
+    </ReactFitty>
+  );
+};
+
+const AutoSizeSmall = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ReactFitty minSize={6} maxSize={16} wrapText={false}>
+      {children}
+    </ReactFitty>
+  );
+};
+
+const AttemptCell = ({
+  liftName,
+  attemptNumber,
+  isCurrent,
+  lifter,
+}: {
+  liftName: LiftName | undefined;
+  attemptNumber: AttemptNumber | undefined;
+  isCurrent: boolean;
+  lifter: Lifter | null;
+}) => {
+  const attempt =
+    lifter && liftName && attemptNumber
+      ? lifter.lifts[liftName][attemptNumber]
+      : null;
+  return (
+    <div
+      className={classNames(
+        "current-lifter-banner-attempt",
+        isCurrent && "current-lifter-banner-attempt-current",
+        attempt?.result === "good" && "current-lifter-banner-attempt-good",
+        attempt?.result === "bad" && "current-lifter-banner-attempt-bad",
+      )}
+    >
+      {attempt?.weight}
+    </div>
+  );
+};
+
+const Attempts = ({
+  currentAttempt,
+  lifter,
+}: {
+  currentAttempt: Attempt | null;
+  lifter: Lifter | null;
+}) => {
+  return (
+    <>
+      <AttemptCell
+        isCurrent={currentAttempt?.attemptNumber === "1"}
+        liftName={currentAttempt?.liftName}
+        attemptNumber="1"
+        lifter={lifter}
+      />
+      <AttemptCell
+        isCurrent={currentAttempt?.attemptNumber === "2"}
+        liftName={currentAttempt?.liftName}
+        attemptNumber="2"
+        lifter={lifter}
+      />
+      <AttemptCell
+        isCurrent={currentAttempt?.attemptNumber === "3"}
+        liftName={currentAttempt?.liftName}
+        attemptNumber="3"
+        lifter={lifter}
+      />
+    </>
+  );
+};
+

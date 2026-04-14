@@ -1,0 +1,60 @@
+.ref-lights-widget {
+  width: 170px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 33.33%);
+  justify-items: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 8px 8px 20px 8px;
+  position: relative;
+}
+
+.ref-lights-widget-light {
+  height: 40px;
+  width: 40px;
+  border-radius: 30px;
+  border: 1px solid black;
+}
+
+.ref-lights-widget-cards {
+  width: 100%;
+  height: 12px;
+  background-color: var(--dark-blue);
+  position: absolute;
+  bottom: 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 33.33%);
+  justify-items: center;
+  align-items: center;
+  padding: 0px 8px;
+}
+
+.card {
+  width: 25px;
+  height: 5px;
+}
+
+.card-red {
+  background-color: var(--red);
+}
+
+.card-yellow {
+  background-color: var(--ref-yellow);
+}
+
+.card-blue {
+  background-color: var(--ref-blue);
+}
+
+.ref-lights-widget-light-red {
+  background-color: var(--red);
+}
+
+.ref-lights-widget-light-white {
+  background-color: white;
+}
+
+.ref-lights-widget-light-off {
+  background-color: var(--tertiary-color);
+}

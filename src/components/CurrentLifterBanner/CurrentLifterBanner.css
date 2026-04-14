@@ -36,13 +36,27 @@
   white-space: nowrap;
 }
 
-.current-lifter-banner-name,
+.current-lifter-banner-name-last-name {
+  height: 24px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.current-lifter-banner-name-first-name {
+  height: 24px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
 .current-lifter-banner-category {
   height: 24px;
+  font-weight: 100;
+  font-style: italic;
 }
 
 /* make sure the inline-block div that react-fitty adds is centered vertically */
-.current-lifter-banner-name > div > div,
+.current-lifter-banner-name-last-name > div > div,
+.current-lifter-banner-name-first-name > div > div,
 .current-lifter-banner-category > div > div {
   vertical-align: middle;
 }

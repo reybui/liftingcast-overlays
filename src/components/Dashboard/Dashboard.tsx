@@ -11,6 +11,7 @@ import { Flag } from "../Flag/Flag";
 import { PlaceChange } from "../PlaceChange/PlaceChange";
 import { ScoreChange } from "../ScoreChange/ScoreChange";
 import { RecordAttempt } from "../RecordAttempt/RecordAttempt";
+import { RefLightsWidget } from "../RefLightsWidget/RefLightsWidget";
 
 export const Dashboard = ({
   meetId,
@@ -58,7 +59,7 @@ export const Dashboard = ({
                 className={classNames(
                   "sync-indicator",
                   status === "CONNECTED" && "sync-indicator-connected",
-                  updating && "sync-indicator-updating"
+                  updating && "sync-indicator-updating",
                 )}
               ></div>
               Latency: {round(latency)}ms
@@ -84,6 +85,7 @@ export const Dashboard = ({
                       <PlaceChange data={data} platformId={platform.id} />
                       <ScoreChange data={data} platformId={platform.id} />
                       <RecordAttempt data={data} platformId={platform.id} />
+                      <RefLightsWidget data={data} platformId={platform.id} />
                     </div>
                   </div>
                   <UpcomingLifters data={data} platformId={platform.id} />
