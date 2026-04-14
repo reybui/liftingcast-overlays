@@ -85,80 +85,17 @@ export const CurrentLifterBanner = ({
       </div>
       <div className="current-lifter-banner-column-three">
         <div className="current-lifter-banner-attempts">
-          {/* <div className="current-lifter-banner-lift-name">
-            {currentAttempt?.liftName}
-          </div> */}
           <Attempts currentAttempt={currentAttempt} lifter={currentLifter} />
         </div>
       </div>
-      <div className="current-lifter-banner-column-four"></div>
+      <div className="current-lifter-banner-column-four">
+        <CurrentPlace data={data} platformId={platformId} />
+      </div>
+      <div className="current-lifter-banner-column-five"></div>
       <div className="current-lifter-banner-bottom-row"></div>
     </div>
   );
 };
-
-// Optional delay when turning lights off so they stay on long enough to read.
-// const lightsOffDelaySeconds = import.meta.env
-//   .VITE_LIFTINGCAST_LIGHTS_OFF_DELAY_SECONDS as string | undefined;
-// const Lights = ({ refLights }: { refLights: RefLights }) => {
-//   const [refLightsInternal, setRefLightsInternal] =
-//     React.useState<RefLights>(refLights);
-
-//   React.useEffect(() => {
-//     const allSelectedCurrent = every(
-//       refLights,
-//       (rl) => rl.decision === "good" || rl.decision === "bad",
-//     );
-
-//     const allSelectedPrevious = every(
-//       refLightsInternal,
-//       (rl) => rl.decision === "good" || rl.decision === "bad",
-//     );
-//     if (allSelectedPrevious && !allSelectedCurrent) {
-//       setTimeout(
-//         () => setRefLightsInternal(refLights),
-//         Number(lightsOffDelaySeconds ?? "0") * 1000,
-//       );
-//     } else {
-//       setRefLightsInternal(refLights);
-//     }
-//   }, [refLights, refLightsInternal]);
-
-//   return (
-//     <div className="current-lifter-banner-lights">
-//       <Light refLight={refLightsInternal.left} refLights={refLightsInternal} />
-//       <Light refLight={refLightsInternal.head} refLights={refLightsInternal} />
-//       <Light refLight={refLightsInternal.right} refLights={refLightsInternal} />
-//     </div>
-//   );
-// };
-
-// const Light = ({
-//   refLight,
-//   refLights,
-// }: {
-//   refLight: RefLight;
-//   refLights: RefLights;
-// }) => {
-//   const allSelected = every(
-//     refLights,
-//     (rl) => rl.decision === "good" || rl.decision === "bad",
-//   );
-
-//   return (
-//     <div
-//       className={classNames(
-//         "current-lifter-banner-light",
-//         allSelected &&
-//           refLight.decision === "bad" &&
-//           "current-lifter-banner-light-red",
-//         allSelected &&
-//           refLight.decision === "good" &&
-//           "current-lifter-banner-light-white",
-//       )}
-//     ></div>
-//   );
-// };
 
 const AutoSize = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -171,6 +108,14 @@ const AutoSize = ({ children }: { children: React.ReactNode }) => {
 const AutoSizeSmall = ({ children }: { children: React.ReactNode }) => {
   return (
     <ReactFitty minSize={6} maxSize={16} wrapText={false}>
+      {children}
+    </ReactFitty>
+  );
+};
+
+const AutoSizeLarge = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ReactFitty minSize={55} maxSize={80} wrapText={false}>
       {children}
     </ReactFitty>
   );
@@ -243,5 +188,57 @@ const Attempts = ({
         lifter={lifter}
       />
     </>
+  );
+};
+
+const CurrentPlace = ({
+  data,
+  platformId,
+}: {
+  data: MeetApiResponse;
+  platformId: string;
+}) => {
+  const platform = data?.platforms?.[platformId];
+  const currentAttempt = platform?.currentAttempt;
+  if (!currentAttempt) {
+    return null;
+  }
+  const currentLifterId = currentAttempt?.lifter.id;
+
+  const divisions = data.lifters?.[currentLifterId]?.divisions;
+  if (!divisions || !divisions.length) {
+    return null;
+  }
+
+  const firstDivision = divisions[0];
+  const firstDivisionId = firstDivision?.divisionId;
+  if (!firstDivisionId) {
+    return null;
+  }
+
+  const currentPlace = firstDivision?.place;
+  if (!currentPlace) {
+    return null;
+  }
+
+  let currentPlaceText = currentPlace.toString();
+  switch (currentPlaceText) {
+    case "1":
+      currentPlaceText = "1st";
+      break;
+    case "2":
+      currentPlaceText = "2nd";
+      break;
+    case "3":
+      currentPlaceText = "3rd";
+      break;
+    default:
+      currentPlaceText = `${currentPlace}th`;
+  }
+
+  return (
+    <div className="current-place">
+      <AutoSizeLarge>{currentPlaceText}</AutoSizeLarge>
+    </div>
   );
 };

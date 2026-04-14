@@ -64,14 +64,14 @@
 
 .current-lifter-banner-column-three {
   padding: 8px;
-  grid-column: span 8;
+  grid-column: span 7;
   overflow: hidden;
 }
 
 .current-lifter-banner-attempts {
   display: grid;
-  grid-template-columns: 80px 80px 80px 60px;
-  column-gap: 10px;
+  grid-template-columns: 100px 100px 100px;
+  column-gap: 6px;
   align-items: center;
   height: 100%;
 }
@@ -119,7 +119,7 @@
 }
 
 .current-lifter-banner-bottom-row {
-  grid-column: 1 / -1;
+  grid-column: 1 / 17;
   background-color: var(--dark-blue);
   width: 100%;
   height: 12px;
@@ -147,41 +147,20 @@
 }
 
 .current-lifter-banner-column-four {
-  padding: 8px;
   grid-column: span 3;
   overflow: hidden;
   display: flex;
-  justify-content: flex-end;
-}
-
-.current-lifter-banner-column-five {
-  padding: 8px;
-  grid-column: span 3;
-  overflow: hidden;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* .current-lifter-banner-lights {
-  width: 170px;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 33.33%);
-  justify-items: center;
+  justify-content: center;
   align-items: center;
 }
 
-.current-lifter-banner-light {
-  height: 40px;
-  width: 40px;
-  border-radius: 30px;
-  border: 1px solid black;
+.current-place {
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
 }
 
-.current-lifter-banner-light-red {
-  background-color: var(--red);
+.current-lifter-banner-column-five {
+  grid-row: span 3;
+  overflow: hidden;
 }
-
-.current-lifter-banner-light-white {
-  background-color: white;
-} */
