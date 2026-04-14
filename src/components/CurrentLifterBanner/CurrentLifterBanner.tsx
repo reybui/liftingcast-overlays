@@ -91,75 +91,74 @@ export const CurrentLifterBanner = ({
           <Attempts currentAttempt={currentAttempt} lifter={currentLifter} />
         </div>
       </div>
-      <div className="current-lifter-banner-column-four">
-        <Lights refLights={platform.refLights} />
-      </div>
+      <div className="current-lifter-banner-column-four"></div>
+      <div className="current-lifter-banner-bottom-row"></div>
     </div>
   );
 };
 
 // Optional delay when turning lights off so they stay on long enough to read.
-const lightsOffDelaySeconds = import.meta.env
-  .VITE_LIFTINGCAST_LIGHTS_OFF_DELAY_SECONDS as string | undefined;
-const Lights = ({ refLights }: { refLights: RefLights }) => {
-  const [refLightsInternal, setRefLightsInternal] =
-    React.useState<RefLights>(refLights);
+// const lightsOffDelaySeconds = import.meta.env
+//   .VITE_LIFTINGCAST_LIGHTS_OFF_DELAY_SECONDS as string | undefined;
+// const Lights = ({ refLights }: { refLights: RefLights }) => {
+//   const [refLightsInternal, setRefLightsInternal] =
+//     React.useState<RefLights>(refLights);
 
-  React.useEffect(() => {
-    const allSelectedCurrent = every(
-      refLights,
-      (rl) => rl.decision === "good" || rl.decision === "bad",
-    );
+//   React.useEffect(() => {
+//     const allSelectedCurrent = every(
+//       refLights,
+//       (rl) => rl.decision === "good" || rl.decision === "bad",
+//     );
 
-    const allSelectedPrevious = every(
-      refLightsInternal,
-      (rl) => rl.decision === "good" || rl.decision === "bad",
-    );
-    if (allSelectedPrevious && !allSelectedCurrent) {
-      setTimeout(
-        () => setRefLightsInternal(refLights),
-        Number(lightsOffDelaySeconds ?? "0") * 1000,
-      );
-    } else {
-      setRefLightsInternal(refLights);
-    }
-  }, [refLights, refLightsInternal]);
+//     const allSelectedPrevious = every(
+//       refLightsInternal,
+//       (rl) => rl.decision === "good" || rl.decision === "bad",
+//     );
+//     if (allSelectedPrevious && !allSelectedCurrent) {
+//       setTimeout(
+//         () => setRefLightsInternal(refLights),
+//         Number(lightsOffDelaySeconds ?? "0") * 1000,
+//       );
+//     } else {
+//       setRefLightsInternal(refLights);
+//     }
+//   }, [refLights, refLightsInternal]);
 
-  return (
-    <div className="current-lifter-banner-lights">
-      <Light refLight={refLightsInternal.left} refLights={refLightsInternal} />
-      <Light refLight={refLightsInternal.head} refLights={refLightsInternal} />
-      <Light refLight={refLightsInternal.right} refLights={refLightsInternal} />
-    </div>
-  );
-};
+//   return (
+//     <div className="current-lifter-banner-lights">
+//       <Light refLight={refLightsInternal.left} refLights={refLightsInternal} />
+//       <Light refLight={refLightsInternal.head} refLights={refLightsInternal} />
+//       <Light refLight={refLightsInternal.right} refLights={refLightsInternal} />
+//     </div>
+//   );
+// };
 
-const Light = ({
-  refLight,
-  refLights,
-}: {
-  refLight: RefLight;
-  refLights: RefLights;
-}) => {
-  const allSelected = every(
-    refLights,
-    (rl) => rl.decision === "good" || rl.decision === "bad",
-  );
+// const Light = ({
+//   refLight,
+//   refLights,
+// }: {
+//   refLight: RefLight;
+//   refLights: RefLights;
+// }) => {
+//   const allSelected = every(
+//     refLights,
+//     (rl) => rl.decision === "good" || rl.decision === "bad",
+//   );
 
-  return (
-    <div
-      className={classNames(
-        "current-lifter-banner-light",
-        allSelected &&
-          refLight.decision === "bad" &&
-          "current-lifter-banner-light-red",
-        allSelected &&
-          refLight.decision === "good" &&
-          "current-lifter-banner-light-white",
-      )}
-    ></div>
-  );
-};
+//   return (
+//     <div
+//       className={classNames(
+//         "current-lifter-banner-light",
+//         allSelected &&
+//           refLight.decision === "bad" &&
+//           "current-lifter-banner-light-red",
+//         allSelected &&
+//           refLight.decision === "good" &&
+//           "current-lifter-banner-light-white",
+//       )}
+//     ></div>
+//   );
+// };
 
 const AutoSize = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -193,15 +192,25 @@ const AttemptCell = ({
       ? lifter.lifts[liftName][attemptNumber]
       : null;
   return (
-    <div
-      className={classNames(
-        "current-lifter-banner-attempt",
-        isCurrent && "current-lifter-banner-attempt-current",
-        attempt?.result === "good" && "current-lifter-banner-attempt-good",
-        attempt?.result === "bad" && "current-lifter-banner-attempt-bad",
-      )}
-    >
-      {attempt?.weight}
+    <div className="current-lifter-banner-attempt-wrapper">
+      <div
+        className={classNames(
+          "current-lifter-banner-attempt",
+          isCurrent && "current-lifter-banner-attempt-current",
+          attempt?.result === "good" && "current-lifter-banner-attempt-good",
+          attempt?.result === "bad" && "current-lifter-banner-attempt-bad",
+        )}
+      >
+        {attempt?.weight}
+      </div>
+      <div
+        className={classNames(
+          "attempt-card",
+          isCurrent && "attempt-card-white",
+          attempt?.result === "good" && "attempt-card-green",
+          attempt?.result === "bad" && "attempt-card-red",
+        )}
+      />
     </div>
   );
 };
@@ -236,4 +245,3 @@ const Attempts = ({
     </>
   );
 };
-
