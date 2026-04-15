@@ -1,18 +1,26 @@
 import { first, last, round, sortBy, take } from "lodash";
 import { LifterAttempts, MeetApiResponse } from "../../types";
 import "./Standings.css";
-import React from "react";
+import React, { useEffect } from "react";
 
 // @ts-expect-error types are not working for react-fitty
 import { ReactFitty } from "react-fitty";
 
-export const Standings = ({ data }: { data: MeetApiResponse }) => {
+export const Standings = ({
+  data,
+  platformId,
+  forecasted: forecastedProp,
+}: {
+  data: MeetApiResponse;
+  platformId: string;
+  forecasted?: boolean;
+}) => {
   const divisionOptions = sortBy(
     Object.values(data.divisions ?? {}).map((d) => ({
       label: d.name,
       value: d.id,
     })),
-    "label"
+    "label",
   );
 
   const [selectedDivisionId, setSelectedDivisionId] = React.useState<
@@ -29,13 +37,13 @@ export const Standings = ({ data }: { data: MeetApiResponse }) => {
       (wId) => ({
         label: selectedDivision?.weightClasses[wId]?.name ?? "",
         value: wId,
-      })
+      }),
     ),
-    (w) => Number(w.label)
+    (w) => Number(w.label),
   );
 
   const [selectedWeightClassId, setSelectedWeightClassId] = React.useState(
-    selectedDivision ? first(weightClassOptions)?.value : null
+    selectedDivision ? first(weightClassOptions)?.value : null,
   );
 
   const selectedWeightClass =
@@ -43,7 +51,24 @@ export const Standings = ({ data }: { data: MeetApiResponse }) => {
       ? selectedDivision.weightClasses[selectedWeightClassId]
       : null;
 
-  const [forecasted, setForecasted] = React.useState(false);
+  const forecasted = forecastedProp ?? false;
+
+  const currentAttempt = data.platforms?.[platformId]?.currentAttempt;
+  const currentLifterId = currentAttempt?.lifter.id;
+  const currentLifterDivision = first(
+    data.lifters?.[currentLifterId ?? ""]?.divisions,
+  );
+
+  useEffect(() => {
+    if (currentLifterDivision?.divisionId) {
+      setSelectedDivisionId(currentLifterDivision.divisionId);
+      setSelectedWeightClassId(currentLifterDivision.weightClassId ?? null);
+    }
+  }, [
+    currentLifterId,
+    currentLifterDivision?.divisionId,
+    currentLifterDivision?.weightClassId,
+  ]);
 
   // Remove the word Points from scoreBy as it takes up too much space.
   const scoreBy = selectedDivision?.scoreBy
@@ -76,7 +101,7 @@ export const Standings = ({ data }: { data: MeetApiResponse }) => {
               setSelectedWeightClassId(
                 selectedDivision
                   ? first(Object.keys(selectedDivision.weightClasses))
-                  : null
+                  : null,
               );
             }}
           >
@@ -101,17 +126,10 @@ export const Standings = ({ data }: { data: MeetApiResponse }) => {
             })}
           </select>
         </div>
-        <div>
-          <div>Forecasted</div>
-          <select onChange={(e) => setForecasted(e.target.value === "true")}>
-            <option value="false">false</option>
-            <option value="true">true</option>
-          </select>
-        </div>
       </div>
       <div className="standings-category-name">
-        {forecasted ? "Forecasted" : ""} {selectedDivision?.name} -{" "}
-        {selectedWeightClass?.name}
+        {forecasted ? "Forecasted" : ""} {selectedDivision?.name}{" "}
+        {selectedWeightClass?.name} {" LEADERBOARD"}
       </div>
       <div>
         <div className="standings-row">
@@ -185,13 +203,15 @@ const useCategoryRankings = ({
         bestDead: getBestLift({ forecasted, attempts: l.lifts.dead }),
         selectedDivision: l.divisions.find(
           (ld) =>
-            ld.divisionId === divisionId && ld.weightClassId === weightClassId
+            ld.divisionId === divisionId && ld.weightClassId === weightClassId,
         ),
       };
     });
 
   const sortedLifters = sortBy(allLiftersInSelectedCategory, (l) =>
-    forecasted ? l.selectedDivision?.forecastedPlace : l.selectedDivision?.place
+    forecasted
+      ? l.selectedDivision?.forecastedPlace
+      : l.selectedDivision?.place,
   );
 
   const topLifters = take(sortedLifters, maxRows);
@@ -209,10 +229,10 @@ const getBestLift = ({
   return last(
     sortBy(
       Object.values(attempts).filter(
-        (lift) => lift.weight && (forecasted || lift.result === "good")
+        (lift) => lift.weight && (forecasted || lift.result === "good"),
       ),
-      (lift) => lift.weight
-    )
+      (lift) => lift.weight,
+    ),
   )?.weight;
 };
 

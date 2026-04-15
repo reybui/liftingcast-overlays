@@ -94,12 +94,14 @@ export const Dashboard = ({
             })}
         </div>
 
-        {data && (
-          <div>
-            <Standings data={data} />
-            <Standings data={data} />
-          </div>
-        )}
+        {data &&
+          data.platforms &&
+          Object.values(data.platforms).map((platform) => (
+            <div key={platform.id}>
+              <Standings data={data} platformId={platform.id} forecasted={false} />
+              <Standings data={data} platformId={platform.id} forecasted={true} />
+            </div>
+          ))}
       </div>
     </>
   );
