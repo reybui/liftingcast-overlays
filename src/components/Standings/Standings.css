@@ -7,6 +7,7 @@
   height: 690px;
   margin-bottom: 20px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .standings .standings-config-bar {
@@ -17,31 +18,54 @@
 
 .standings .standings-category-name,
 .standings .standings-row {
-  border-radius: 12px;
   padding: 8px;
   overflow: hidden;
-  background-color: #444444;
+  background-color: var(--secondary-color);
   color: white;
   font-weight: bold;
-  margin-bottom: 8px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.standings .standings-category-name {
+  color: white;
+  background-color: var(--primary-color);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
 .standings .standings-row {
   display: grid;
-  grid-template-columns: 30px 200px 70px 70px 70px 100px;
-  padding-left: 20px;
+  grid-template-columns: 30px 1fr 70px 70px 70px 100px;
+  padding: 0;
 }
 
 .standings .standings-row .standing-item {
   overflow: hidden;
   white-space: nowrap;
-  padding-right: 4px;
   display: flex;
   align-items: center;
+  align-self: stretch;
+  justify-content: center;
+  padding: 0 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.standings .standings-row:nth-child(1) {
+  background-color: var(--tertiary-color);
+}
+
+.standings .standings-row:not(:nth-child(1)) .standing-item:nth-child(1) {
+  background-color: var(--tertiary-color);
+  font-weight: bold;
+}
+
+.standings .standings-row:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 /* make sure the inline-block div that react-fitty adds is centered vertically */

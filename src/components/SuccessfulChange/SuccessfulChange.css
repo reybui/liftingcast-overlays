@@ -39,7 +39,7 @@
   width: 125px;
   height: 30px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
   background-color: var(--tertiary-color);
   align-items: center;
