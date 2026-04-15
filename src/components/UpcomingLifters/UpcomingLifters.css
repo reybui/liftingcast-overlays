@@ -24,6 +24,15 @@
   background-color: var(--tertiary-color);
 }
 
+.upcoming-lifters-lifter-name:last-child .upcoming-lifters-order {
+  border-bottom-left-radius: 6px;
+}
+
+.upcoming-lifters-lifter-name:last-child {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
 /* make sure the inline-block div that react-fitty adds is centered vertically */
 .upcoming-lifters-lifter-name > div {
   display: flex;
@@ -43,4 +52,6 @@
   font-weight: bold;
   width: 250px;
   text-align: left;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }

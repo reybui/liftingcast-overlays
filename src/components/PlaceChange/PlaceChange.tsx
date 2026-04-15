@@ -1,6 +1,12 @@
 import "./PlaceChange.css";
 import { MeetApiResponse } from "../../types";
 
+const ordinal = (n: number): string => {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] ?? s[v] ?? "th");
+};
+
 export const PlaceChange = ({
   data,
   platformId,
@@ -50,12 +56,12 @@ const PlaceChangeInner = ({
     : null;
 
   if (!possiblePlace) {
-    return <div>{currentPlace}</div>;
+    return <div>{ordinal(currentPlace)}</div>;
   }
 
   return (
     <div className="place-change-inner">
-      {currentPlace}
+      {ordinal(currentPlace)}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="icon"
@@ -64,7 +70,7 @@ const PlaceChangeInner = ({
       >
         <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
       </svg>
-      {possiblePlace}
+      {ordinal(possiblePlace)}
     </div>
   );
 };

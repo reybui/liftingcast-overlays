@@ -19,11 +19,11 @@ export const UpcomingLifters = ({
     return null;
   }
 
-  const nextFiveAttempts = take(platform.nextAttempts, 5);
+  const nextThreeAttempts = take(platform.nextAttempts, 3);
   return (
     <div className="upcoming-lifters">
       <div className="upcoming-lifters-header">UP NEXT</div>
-      {nextFiveAttempts.map((attempt, index) => {
+      {nextThreeAttempts.map((attempt, index) => {
         return (
           <div key={attempt.id} className="upcoming-lifters-lifter-name">
             <span className="upcoming-lifters-order">{index + 1}</span>

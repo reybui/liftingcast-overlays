@@ -1,13 +1,12 @@
 import {
   Attempt,
   AttemptNumber,
+  LifterAttempts,
   LiftName,
   Lifter,
   MeetApiResponse,
-  RefLight,
-  RefLights,
 } from "../../types";
-import { every, first } from "lodash";
+import { first, last, sortBy } from "lodash";
 import classNames from "classnames";
 import "./CurrentLifterBanner.css";
 import React from "react";
@@ -88,10 +87,12 @@ export const CurrentLifterBanner = ({
           <Attempts currentAttempt={currentAttempt} lifter={currentLifter} />
         </div>
       </div>
-      <div className="current-lifter-banner-column-four">
+      <div className="current-lifter-banner-column-four" key={currentLifterId}>
         <CurrentPlace data={data} platformId={platformId} />
       </div>
-      <div className="current-lifter-banner-column-five"></div>
+      <div className="current-lifter-banner-column-five">
+        <BestLifts lifter={currentLifter} />
+      </div>
       <div className="current-lifter-banner-bottom-row"></div>
     </div>
   );
@@ -108,14 +109,6 @@ const AutoSize = ({ children }: { children: React.ReactNode }) => {
 const AutoSizeSmall = ({ children }: { children: React.ReactNode }) => {
   return (
     <ReactFitty minSize={6} maxSize={16} wrapText={false}>
-      {children}
-    </ReactFitty>
-  );
-};
-
-const AutoSizeLarge = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <ReactFitty minSize={55} maxSize={80} wrapText={false}>
       {children}
     </ReactFitty>
   );
@@ -236,9 +229,41 @@ const CurrentPlace = ({
       currentPlaceText = `${currentPlace}th`;
   }
 
+  return <div className="current-place">{currentPlaceText}</div>;
+};
+
+const getBestLift = (attempts: LifterAttempts): number | null => {
   return (
-    <div className="current-place">
-      <AutoSizeLarge>{currentPlaceText}</AutoSizeLarge>
+    last(
+      sortBy(
+        Object.values(attempts).filter((a) => a.weight && a.result === "good"),
+        (a) => a.weight,
+      ),
+    )?.weight ?? null
+  );
+};
+
+export const BestLifts = ({ lifter }: { lifter: Lifter | null }) => {
+  if (!lifter) return null;
+
+  const bestSquat = getBestLift(lifter.lifts.squat);
+  const bestBench = getBestLift(lifter.lifts.bench);
+  const bestDead = getBestLift(lifter.lifts.dead);
+
+  return (
+    <div className="best-lifts">
+      <div className="best-lifts-row">
+        <span className="best-lifts-label">S</span>
+        <span className="best-lifts-value">{bestSquat ?? "-"}</span>
+      </div>
+      <div className="best-lifts-row">
+        <span className="best-lifts-label">B</span>
+        <span className="best-lifts-value">{bestBench ?? "-"}</span>
+      </div>
+      <div className="best-lifts-row">
+        <span className="best-lifts-label">D</span>
+        <span className="best-lifts-value">{bestDead ?? "-"}</span>
+      </div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { PlaceChange } from "../PlaceChange/PlaceChange";
 import { ScoreChange } from "../ScoreChange/ScoreChange";
 import { RecordAttempt } from "../RecordAttempt/RecordAttempt";
 import { RefLightsWidget } from "../RefLightsWidget/RefLightsWidget";
+import { SuccessfulChange } from "../SuccessfulChange/SuccessfulChange";
 
 export const Dashboard = ({
   meetId,
@@ -82,13 +83,12 @@ export const Dashboard = ({
                         latency={latency}
                       />
                       <Flag data={data} platformId={platform.id} />
-                      <PlaceChange data={data} platformId={platform.id} />
-                      <ScoreChange data={data} platformId={platform.id} />
                       <RecordAttempt data={data} platformId={platform.id} />
                       <RefLightsWidget data={data} platformId={platform.id} />
                     </div>
                   </div>
                   <UpcomingLifters data={data} platformId={platform.id} />
+                  <SuccessfulChange data={data} platformId={platform.id} />
                 </div>
               );
             })}
