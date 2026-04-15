@@ -31,14 +31,14 @@
   /* background-color: orange; */
   background-color: rgba(0, 0, 0, 0);
 
-  --primary-color: rgba(30, 53, 102, 0.8);
-  --secondary-color: rgba(129, 160, 199, 0.8);
-  --tertiary-color: rgba(100, 120, 144, 0.8);
+  --primary-color: rgba(30, 53, 102, 0.9);
+  --secondary-color: rgba(129, 160, 199, 0.9);
+  --tertiary-color: rgba(100, 120, 144, 0.9);
   --red: rgb(255 39 37);
   --green: rgb(0 188 48);
   --ref-blue: rgb(0 143 235);
   --ref-yellow: rgb(255 225 50);
-  --dark-blue: rgba(53, 59, 73, 1);
+  --dark-blue: rgba(53, 59, 73, 0.9);
 }
 
 body {
