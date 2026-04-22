@@ -1,9 +1,5 @@
 # LiftingCast Overlay Starter App build with React + TypeScript + Vite
 
-This is an example project to build graphic overlays for LiftingCast. You can add this to your video feed as a web capture using tools like OBS (https://obsproject.com/).
-
-https://vitejs.dev/ for more info on developing with vite.
-
 ## Getting started
 
 Install node version from .nvmrc file.
@@ -43,6 +39,36 @@ You can run this app on the same system that you run your steaming capture softw
 ```
 npm run start
 ```
+
+### Docker
+
+If you prefer not to install Node, you can run the app using Docker. Only Docker needs to be installed on the host PC.
+
+Install Docker Desktop from https://www.docker.com/products/docker-desktop.
+
+Copy .env.sample to .env and fill in your credentials as described above.
+
+Build and start the app:
+
+```
+docker compose up
+```
+
+The app will be available at http://localhost:4001.
+
+To stop the app press `Ctrl+C`, or run:
+
+```
+docker compose down
+```
+
+To rebuild after making changes to the source code:
+
+```
+docker compose up --build
+```
+
+> Note: On a fresh clone `docker compose up` is sufficient — Docker builds the image automatically if it doesn't exist yet.
 
 If you host this app online it is recommended that access to load the app is secured in some way. Your LiftingCast API key and meet password will be available in the source code and could be stolen from you. It is your responsibility to keep your LiftingCast API key secure.
 

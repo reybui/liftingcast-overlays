@@ -8,8 +8,6 @@ import classNames from "classnames";
 import { Clock } from "../Clock/Clock";
 import { round } from "lodash";
 import { Flag } from "../Flag/Flag";
-import { PlaceChange } from "../PlaceChange/PlaceChange";
-import { ScoreChange } from "../ScoreChange/ScoreChange";
 import { RecordAttempt } from "../RecordAttempt/RecordAttempt";
 import { RefLightsWidget } from "../RefLightsWidget/RefLightsWidget";
 import { SuccessfulChange } from "../SuccessfulChange/SuccessfulChange";
@@ -98,8 +96,16 @@ export const Dashboard = ({
           data.platforms &&
           Object.values(data.platforms).map((platform) => (
             <div key={platform.id}>
-              <Standings data={data} platformId={platform.id} forecasted={false} />
-              <Standings data={data} platformId={platform.id} forecasted={true} />
+              <Standings
+                data={data}
+                platformId={platform.id}
+                forecasted={false}
+              />
+              <Standings
+                data={data}
+                platformId={platform.id}
+                forecasted={true}
+              />
             </div>
           ))}
       </div>
