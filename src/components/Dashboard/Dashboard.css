@@ -65,4 +65,6 @@
   display: flex;
   justify-content: space-between;
   margin-right: 50px;
+  padding: 8px;
+  height: 100px;
 }

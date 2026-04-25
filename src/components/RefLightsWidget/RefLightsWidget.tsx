@@ -46,19 +46,43 @@ const Lights = ({ refLights }: { refLights: RefLights }) => {
     }
   }, [refLights, refLightsInternal]);
 
+  const allSelected = every(
+    refLightsInternal,
+    (rl) => rl.decision === "good" || rl.decision === "bad",
+  );
+
   return (
-    <div className="ref-lights-widget">
-      <Light refLight={refLightsInternal.left} refLights={refLightsInternal} />
-      <Light refLight={refLightsInternal.head} refLights={refLightsInternal} />
-      <Light refLight={refLightsInternal.right} refLights={refLightsInternal} />
-      <div className="ref-lights-widget-cards">
-        <Card refLight={refLightsInternal.left} refLights={refLightsInternal} />
-        <Card refLight={refLightsInternal.head} refLights={refLightsInternal} />
-        <Card
-          refLight={refLightsInternal.right}
-          refLights={refLightsInternal}
-        />
-      </div>
+    <div className="ref-lights-widget-container">
+      {allSelected && (
+        <div className="ref-lights-widget">
+          <Light
+            refLight={refLightsInternal.left}
+            refLights={refLightsInternal}
+          />
+          <Light
+            refLight={refLightsInternal.head}
+            refLights={refLightsInternal}
+          />
+          <Light
+            refLight={refLightsInternal.right}
+            refLights={refLightsInternal}
+          />
+          <div className="ref-lights-widget-cards">
+            <Card
+              refLight={refLightsInternal.left}
+              refLights={refLightsInternal}
+            />
+            <Card
+              refLight={refLightsInternal.head}
+              refLights={refLightsInternal}
+            />
+            <Card
+              refLight={refLightsInternal.right}
+              refLights={refLightsInternal}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
