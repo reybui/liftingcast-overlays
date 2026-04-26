@@ -51,6 +51,13 @@ const RecordAttemptInner = ({
 
   const records = currentLifterAttempt.records;
 
+  console.log("RecordAttempt debug", {
+    currentLiftName,
+    currentAttemptNumber,
+    currentLifterAttempt,
+    records,
+  });
+
   if (!records || !records.length) {
     return null;
   }
@@ -85,5 +92,6 @@ const RecordAttemptInner = ({
     );
   }
 
+  console.log("Unknown record attempt type", records);
   return null;
 };

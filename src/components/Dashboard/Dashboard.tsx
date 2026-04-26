@@ -11,6 +11,7 @@ import { Flag } from "../Flag/Flag";
 import { RecordAttempt } from "../RecordAttempt/RecordAttempt";
 import { RefLightsWidget } from "../RefLightsWidget/RefLightsWidget";
 import { SuccessfulChange } from "../SuccessfulChange/SuccessfulChange";
+import { ClockSeconds } from "../ClockSeconds/ClockSeconds";
 
 export const Dashboard = ({
   meetId,
@@ -76,6 +77,11 @@ export const Dashboard = ({
                     <CurrentLifterBanner data={data} platformId={platform.id} />
                     <div className="secondary-banner">
                       <Clock
+                        data={data}
+                        platformId={platform.id}
+                        latency={latency}
+                      />
+                      <ClockSeconds
                         data={data}
                         platformId={platform.id}
                         latency={latency}

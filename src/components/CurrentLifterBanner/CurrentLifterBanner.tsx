@@ -11,6 +11,26 @@ import classNames from "classnames";
 import "./CurrentLifterBanner.css";
 import React from "react";
 import logo from "/logo.png";
+import logoWBOP from "/teams/WBOP.png";
+import logoAPA from "/teams/APA.png";
+import logoWCPA from "/teams/WCPA.png";
+import logoSouthern from "/teams/Southern.png";
+import logoCPA from "/teams/CPA.png";
+import logoNorthland from "/teams/Northland.png";
+
+const teamLogos: Record<string, string> = {
+  WBOP: logoWBOP,
+  APA: logoAPA,
+  WCPA: logoWCPA,
+  Southern: logoSouthern,
+  CPA: logoCPA,
+  Northland: logoNorthland,
+};
+
+const getTeamLogo = (team: string | null | undefined): string => {
+  if (!team) return logo;
+  return teamLogos[team] ?? logo;
+};
 
 // @ts-expect-error types are not working for react-fitty
 import { ReactFitty } from "react-fitty";
@@ -48,7 +68,11 @@ export const CurrentLifterBanner = ({
   return (
     <div className="current-lifter-banner">
       <div className="current-lifter-banner-column-one">
-        <img src={logo} className="logo" alt="logo" />
+        <img
+          src={getTeamLogo(currentLifter?.team)}
+          className="logo"
+          alt="logo"
+        />
       </div>
       <div className="current-lifter-banner-column-two">
         <div className="current-lifter-banner-name-last-name">
@@ -70,7 +94,7 @@ export const CurrentLifterBanner = ({
                   currentLifter.name.lastIndexOf(" "),
                 )
               : null}
-            {!!currentLifter?.team && ` : ${currentLifter.team}`}
+            {/* {!!currentLifter?.team && ` : ${currentLifter.team}`} */}
           </AutoSize>
         </div>
 
