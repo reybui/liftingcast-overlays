@@ -12,6 +12,7 @@ import { RecordAttempt } from "../RecordAttempt/RecordAttempt";
 import { RefLightsWidget } from "../RefLightsWidget/RefLightsWidget";
 import { SuccessfulChange } from "../SuccessfulChange/SuccessfulChange";
 import { ClockSeconds } from "../ClockSeconds/ClockSeconds";
+import { StandingsCondensed } from "../StandingsCondensed/StandingsCondensed";
 
 export const Dashboard = ({
   meetId,
@@ -112,6 +113,7 @@ export const Dashboard = ({
                 platformId={platform.id}
                 forecasted={true}
               />
+              <StandingsCondensed data={data} platformId={platform.id} />
             </div>
           ))}
       </div>

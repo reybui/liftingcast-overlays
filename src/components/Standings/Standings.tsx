@@ -134,7 +134,10 @@ export const Standings = ({
       <div>
         <div className="standings-row">
           <div className="standing-item"></div>
-          <div className="standing-item"></div>
+          <div className="standing-item">
+            {forecasted ? "(IF ALL LIFTS MADE)" : ""}
+          </div>
+          <div className="standing-item">BW</div>
           <div className="standing-item">Squat</div>
           <div className="standing-item">Bench</div>
           <div className="standing-item">Dead</div>
@@ -153,6 +156,7 @@ export const Standings = ({
               <div className="standing-item">
                 <AutoSize>{l.name}</AutoSize>
               </div>
+              <div className="standing-item">{l.bodyWeight ?? "-"}</div>
               <div className="standing-item">{l.bestSquat}</div>
               <div className="standing-item">{l.bestBench}</div>
               <div className="standing-item">{l.bestDead}</div>
@@ -238,7 +242,7 @@ const getBestLift = ({
 
 const AutoSize = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ReactFitty minSize={8} maxSize={16} wrapText={false}>
+    <ReactFitty minSize={11} maxSize={16} wrapText={false}>
       {children}
     </ReactFitty>
   );

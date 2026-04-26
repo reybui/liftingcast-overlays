@@ -1,23 +1,23 @@
-.standings {
+.standings-condensed {
   padding: 20px;
   padding-bottom: 0;
   border: 1px solid black;
   border-radius: 12px;
-  width: 700px;
+  width: 550px;
   height: 690px;
   margin-bottom: 20px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.standings .standings-config-bar {
+.standings-condensed .standings-condensed-config-bar {
   display: grid;
-  grid-template-columns: 300px 180px 120px;
+  grid-template-columns: 240px 180px;
   margin-bottom: 20px;
 }
 
-.standings .standings-category-name,
-.standings .standings-row {
+.standings-condensed .standings-condensed-category-name,
+.standings-condensed .standings-condensed-row {
   padding: 8px;
   overflow: hidden;
   background-color: var(--secondary-color);
@@ -29,20 +29,20 @@
   justify-content: center;
 }
 
-.standings .standings-category-name {
+.standings-condensed .standings-condensed-category-name {
   color: white;
   background-color: var(--primary-color);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
 
-.standings .standings-row {
+.standings-condensed .standings-condensed-row {
   display: grid;
-  grid-template-columns: 30px 1fr 60px 70px 70px 70px 100px;
+  grid-template-columns: 30px 1fr 110px 100px;
   padding: 0;
 }
 
-.standings .standings-row .standing-item {
+.standings-condensed .standings-condensed-row .standings-condensed-item {
   overflow: hidden;
   white-space: nowrap;
   display: flex;
@@ -54,21 +54,26 @@
   text-transform: uppercase;
 }
 
-.standings .standings-row:nth-child(1) {
+.standings-condensed .standings-condensed-row:nth-child(1) {
   background-color: var(--tertiary-color);
 }
 
-.standings .standings-row:not(:nth-child(1)) .standing-item:nth-child(1) {
+.standings-condensed
+  .standings-condensed-row:not(:nth-child(1))
+  .standings-condensed-item:nth-child(1) {
   background-color: var(--tertiary-color);
   font-weight: bold;
 }
 
-.standings .standings-row:last-child {
+.standings-condensed .standings-condensed-row:last-child {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
 
-/* make sure the inline-block div that react-fitty adds is centered vertically */
-.standings .standings-row .standing-item > div > div {
+.standings-condensed
+  .standings-condensed-row
+  .standings-condensed-item
+  > div
+  > div {
   vertical-align: middle;
 }

@@ -1,8 +1,7 @@
 .dashboard {
   display: grid;
-  grid-template-columns: 1260px 600px;
+  grid-template-columns: 1260px 700px;
   column-gap: 20px;
-  overflow: hidden;
 }
 
 .connection-info {
