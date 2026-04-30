@@ -60,7 +60,7 @@ export const Clock = ({
 };
 
 const formatTimer = (d: number) => {
-  const ms = Math.floor((d % 1000) / 100);
+  //const ms = Math.floor((d % 1000) / 100);
   d /= 1000;
   const h = Math.floor(d / 3600);
   const m = Math.floor((d % 3600) / 60);
