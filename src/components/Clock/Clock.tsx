@@ -25,7 +25,7 @@ export const Clock = ({
   const previousClockState = React.useRef(clockState);
   const [timeRemaining, setTimeRemaining] = React.useState(clockTimerLength);
   const [clockStartedAt, setClockStartedAt] = React.useState<number | null>(
-    null
+    null,
   );
 
   React.useEffect(() => {
@@ -76,5 +76,5 @@ const formatTimer = (d: number) => {
     return `${hours}:${minutes}:${seconds}`;
   }
 
-  return `${minutes}:${seconds}.${ms}`;
+  return `${minutes}:${seconds}`;
 };
