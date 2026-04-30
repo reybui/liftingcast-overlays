@@ -15,7 +15,7 @@
   grid-template-columns: repeat(3, 33.33%);
   justify-items: center;
   align-items: center;
-  background-color: rgba(30, 53, 102, 0.9);
+  background-color: rgba(30, 53, 102, 1);
   padding: 8px 8px 20px 8px;
   position: relative;
   border-radius: 4px;
