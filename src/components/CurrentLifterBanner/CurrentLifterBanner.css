@@ -94,6 +94,8 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .current-lifter-banner-attempt {
